@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Catalog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        body { background: #1f2329; color: #e5e7eb; }
+        .page { max-width: 1200px; margin: 32px auto; background: #2a2f36; border: 1px solid #3f4752; border-radius: 18px; padding: 24px; box-shadow: 0 16px 34px rgba(0, 0, 0, .35); }
+        .page, .page * { color: #ffffff; }
+        .brand { color: #f3f4f6; font-weight: 700; letter-spacing: .3px; }
+        .btn-main { background: #4b5563; color: #fff; border: 1px solid #6b7280; border-radius: 12px; }
+        .btn-main:hover { background: #374151; color: #fff; }
+        .btn-success { background: #0f766e; border-color: #0f766e; }
+        .btn-info { background: #0369a1; border-color: #0369a1; }
+        .btn-secondary { background: #4b5563; border-color: #4b5563; }
+        .form-control, .form-select { border-radius: 12px; background: #1f2329; border: 1px solid #4b5563; color: #e5e7eb; }
+        .form-control::placeholder { color: #ffffff; opacity: .85; }
+        .form-select option { background: #1f2329; color: #ffffff; }
+        .btn-outline-dark, .btn-outline-primary { color: #ffffff; border-color: #9ca3af; }
+        .btn-outline-dark:hover, .btn-outline-primary:hover { color: #ffffff; background: #4b5563; border-color: #9ca3af; }
+        .btn-warning, .btn-danger { color: #ffffff; }
+        .table { overflow: hidden; border-radius: 12px; --bs-table-bg: #2a2f36; --bs-table-color: #ffffff; --bs-table-striped-bg: #242a31; --bs-table-striped-color: #ffffff; --bs-table-hover-bg: #313844; --bs-table-hover-color: #ffffff; --bs-table-active-color: #ffffff; }
+        .table td, .table th { color: #ffffff !important; }
+        .table thead th { background: #374151; color: #f9fafb; border-bottom-color: #4b5563; }
+        .cover { width: 70px; height: 100px; object-fit: cover; border-radius: 10px; border: 1px solid #4b5563; }
+    </style>
+</head>
+<body>
+<div class="page">
+    <h1 class="brand mb-4">Book Catalog</h1>
+    <form method="get" action="/books" class="d-flex gap-2 mb-3">
+        <input type="text" name="search" class="form-control form-control-lg" placeholder="Search by title..." th:value="${search}"/>
+        <button class="btn btn-main btn-lg">Search</button>
+    </form>
+    <div class="d-flex flex-wrap gap-2 mb-3">
+        <a href="/books/new" class="btn btn-success btn-lg">Add Book</a>
+        <a href="/books/search-openlibrary" class="btn btn-info btn-lg text-white">Import from Open Library</a>
+        <a href="/genres" class="btn btn-secondary btn-lg">Manage Genres</a>
+    </div>
+    <div class="mb-3">
+        <span class="me-2">Filter by genre:</span>
+        <a href="/books" class="btn btn-sm btn-outline-dark">All</a>
+        <a th:each="genre : ${genres}" th:href="@{/books(genreId=${genre.id})}" th:text="${genre.name}" class="btn btn-sm btn-outline-primary"></a>
+    </div>
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td>
+                <img th:if="${book.coverUrl != null and !book.coverUrl.isBlank()}" th:src="${book.coverUrl}" class="cover" alt="cover"/>
+                <span th:unless="${book.coverUrl != null and !book.coverUrl.isBlank()}">-</span>
+            </td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.publishYear}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.genreName}"></td>
+            <td th:text="${book.rating}"></td>
+            <td>
+                <a th:href="@{/books/edit/{id}(id=${book.id})}" class="btn btn-sm btn-warning">Edit</a>
+                <form th:action="@{/books/delete/{id}(id=${book.id})}" method="post" style="display:inline">
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this book?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
