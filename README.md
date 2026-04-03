@@ -1,6 +1,6 @@
 # Book Catalog — Лабораторна робота
 
-> **Студент:** Levytskyi  
+> **Студент:** Ян Левицький  
 > **Група:** 121-22-3  
 > **Дата:** 03.04.2026  
 
@@ -202,23 +202,19 @@ src/
 
 ### Каталог книг — `/books`
 
-> Додайте скріншот сторінки списку книг.
+<img width="1920" height="1080" alt="Снимок экрана 2026-04-03 214249" src="https://github.com/user-attachments/assets/0201fd35-4937-4593-8607-b71a1359596a" />
 
 ### Форма додавання/редагування книги — `/books/new`
 
-> Додайте скріншот форми книги.
+<img width="1920" height="1080" alt="Снимок экрана 2026-04-03 214303" src="https://github.com/user-attachments/assets/294687d0-c6c0-4148-a627-8bbab9e48f8a" />
 
 ### Імпорт із Open Library — `/books/search-openlibrary`
 
-> Додайте скріншот сторінки імпорту.
+<img width="1920" height="1080" alt="Снимок экрана 2026-04-03 214319" src="https://github.com/user-attachments/assets/2da9bbb2-7286-41c0-b98f-bd4253ee9cad" />
 
 ### Управління жанрами — `/genres`
 
-> Додайте скріншот сторінки жанрів.
-
-### База даних H2 Console — `/h2-console`
-
-> Додайте скріншот H2 Console.
+<img width="1920" height="1080" alt="Снимок экрана 2026-04-03 214335" src="https://github.com/user-attachments/assets/402d6a44-280d-42d8-84c8-8e0f4ca638df" />
 
 ---
 
